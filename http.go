@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"time"
@@ -70,7 +70,7 @@ func (g *Guard) LoginHandler() http.Handler {
 			UserID   string `json:"user_id"`
 			Password string `json:"password"`
 		}{}
-		sBytes, err := ioutil.ReadAll(r.Body)
+		sBytes, err := io.ReadAll(r.Body)
 		if err != nil {
 			LoginErrorHandler(w, r, NewErrorInternal(
 				"failed to read request body",
